@@ -1,0 +1,65 @@
+<table class="table table-striped table-sm table-bordered">
+  <thead class="thead">
+    <tr *ngIf="headers; else headerContent" style="text-align: left">
+      <th *ngFor="let header of headers" class="col-1">{{ header }}</th>
+    </tr>
+
+    <ng-template #headerContent>
+      <ng-content select="[table-header]"></ng-content>
+    </ng-template>
+  </thead>
+
+  <tbody>
+    <ng-content *ngIf="!columns && !data" select="[table-body]"></ng-content>
+
+    <tr *ngFor="let element of data" style="text-align: left">
+      <td *ngFor="let column of columns" class="col-1">
+        {{ element[column.toString()] }}
+      </td>
+    </tr>
+
+    <tr *ngIf="totalPages">
+      <td colspan="4" class="group-indicators">
+        <div>
+          <div
+            (click)="changePage(0)"
+            [ngClass]="0 === currentePage ? 'disabled' : 'pages'"
+          >
+            <i class="fa fa-step-backward"></i>
+          </div>
+          <div
+            (click)="changePage(currentePage - 1)"
+            [ngClass]="0 === currentePage ? 'disabled' : 'pages'"
+          >
+            <i class="fa fa-caret-left fa-lg"></i>
+          </div>
+          <div
+            *ngFor="let page of groupPages"
+            (click)="changePage(page)"
+            class="pages"
+            [ngClass]="{ 'pages-active': page === currentePage }"
+            [ngClass]="{ 'disabled': pageToShow(page) > totalPages }"
+          >
+            {{ pageToShow(page) }}
+          </div>
+          <div
+            (click)="changePage(currentePage + 1)"
+            [ngClass]="
+              totalPages === pageToShow(currentePage) ? 'disabled' : 'pages'
+            "
+          >
+            <i class="fa fa-caret-right fa-lg"></i>
+          </div>
+          <div
+            (click)="changePage(totalPages - 1)"
+            [ngClass]="
+              totalPages === pageToShow(currentePage) ? 'disabled' : 'pages'
+            "
+          >
+            <i class="fa fa-step-forward" aria-hidden="true"></i>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,15 @@
+<wm-container>
+  <h4>List years with multiple winners</h4>
+
+  <wm-table>
+    <tr table-header style="text-align: left">
+      <th>Year</th>
+      <th>Win count</th>
+    </tr>
+
+    <tr table-body *ngFor="let winner of winners">
+      <td class="col-1">{{ winner.year }}</td>
+      <td class="col-1">{{ winner.winnerCount }}</td>
+    </tr>
+  </wm-table>
+</wm-container>

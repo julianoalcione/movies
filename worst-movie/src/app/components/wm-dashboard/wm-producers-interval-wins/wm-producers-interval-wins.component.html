@@ -1,0 +1,13 @@
+<wm-container>
+  <h5 style="margin-bottom: 15px">
+    Producers with longest and shortest interval between wins
+  </h5>
+
+  <h5>Maximum</h5>
+  <wm-table [headers]="headers" [columns]="columns" [data]="[producerMax]">
+  </wm-table>
+
+  <h5>Minimum</h5>
+  <wm-table [headers]="headers" [columns]="columns" [data]="[producerMin]">
+  </wm-table>
+</wm-container>

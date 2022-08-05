@@ -1,0 +1,50 @@
+<div class="container-fluid shadow-sm p-3 mb-5 bg-white rounded">
+  <h2>List movies</h2>
+
+  <form *ngIf="!isLoading" [formGroup]="form">
+    <wm-table
+      (changeToPage)="changeToPage($event)"
+      [currentePage]="currentePage"
+      [totalPages]="totalPages"
+    >
+      <tr table-header style="line-height: 50px">
+        <th>ID</th>
+        <th>
+          Year
+          <div style="line-height: 20px">
+            <input
+              class="form-control"
+              (keyup)="debounce.next($event.target.value)"
+              placeholder="Filter by year"
+              type="numbe"
+              maxlength="4"
+            />
+          </div>
+        </th>
+        <th>Title</th>
+        <th>
+          Winner?
+          <div>
+            <select
+              (change)="changeFilter()"
+              formControlName="winner"
+              style="line-height: 15px; text-align: center"
+              class="form-control"
+            >
+              <option [value]="null">Yes/No</option>
+              <option [value]="true">Yes</option>
+              <option [value]="false">No</option>
+            </select>
+          </div>
+        </th>
+      </tr>
+
+      <tr table-body *ngFor="let movie of movies">
+        <td class="col-1">{{ movie.id }}</td>
+        <td class="col-1">{{ movie.year }}</td>
+        <td class="col-1">{{ movie.title }}</td>
+        <td class="col-1">{{ movie.winner ? "Yes" : "No" }}</td>
+      </tr>
+    </wm-table>
+  </form>
+</div>

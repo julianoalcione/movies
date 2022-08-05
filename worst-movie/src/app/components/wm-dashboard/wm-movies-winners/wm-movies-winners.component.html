@@ -1,0 +1,32 @@
+<wm-container>
+  <h4 style="margin-bottom: 25px">List movies winners by year</h4>
+
+  <div style="margin-bottom: 25px">
+    <form style="display: flex" [formGroup]="form">
+      <input
+        class="form-control"
+        placeholder="Search by year"
+        formControlName="year"
+        type="numbe"
+        maxlength="4"
+      />
+
+      <button
+        style="
+          margin-left: 10px;
+          background-color: rgb(41, 102, 255);
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          width: 40px;
+        "
+        (click)="search()"
+      >
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+    </form>
+  </div>
+
+  <wm-table [headers]="headers" [columns]="columns" [data]="winners">
+  </wm-table>
+</wm-container>
